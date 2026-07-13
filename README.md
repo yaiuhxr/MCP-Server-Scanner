@@ -59,19 +59,7 @@ MCP-Server-Scanner/
 │   ├── protocols/        # Stdio, SSE, WebSocket transport layers
 │   ├── checks/           # Security, health, and correctness audits
 │   └── utils/            # Shared utilities (logging, config loaders)
-├── tests/                # Test suite
 └── docs/                 # Detailed architecture & guides
-```
-
----
-
-## 🧪 Running Tests
-
-We use `pytest` for testing. Run the suite with:
-
-```bash
-pip install -r requirements-dev.txt # Or run with editable dev install
-pytest
 ```
 
 ---
