@@ -2,9 +2,19 @@
 Calculator MCP Server
 ----------------------
 A real, working MCP server exposing calculator tools over Streamable HTTP.
+
 Run standalone:  python3 calculator_server.py
 Then advertise it on the LAN with mdns_advertise.py so your mcp_discover.py
 can find it.
+
+Note on Web Browser Testing:
+If you try to open the MCP endpoint (e.g. http://localhost:8000/mcp) directly
+in a browser like Chrome, you will receive:
+  "Not Acceptable: Client must accept text/event-stream"
+This is expected since the endpoint uses SSE and requires an Accept header
+of "text/event-stream". To test/verify, use the MCP Inspector or curl:
+  npx @modelcontextprotocol/inspector python calculator_server.py
+  curl -H "Accept: text/event-stream" http://localhost:8000/mcp
 """
 
 import math

@@ -60,3 +60,34 @@ Your discovery script should already listen for `_mcp._tcp.local.` — once
 `properties["type"] == b"calculator"` and `properties["path"] == b"/mcp"`,
 so you can build the connection URL directly from the discovered service
 info without guessing the path.
+
+## Common Errors & Troubleshooting
+
+### Chrome / Web Browser Error: `Not Acceptable: Client must accept text/event-stream`
+
+If you open the server URL (e.g., `http://localhost:8000/mcp`) directly in a web browser like Google Chrome, you will see a JSON error response:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "server-error",
+  "error": {
+    "code": -32600,
+    "message": "Not Acceptable: Client must accept text/event-stream"
+  }
+}
+```
+
+**Why this happens:**
+FastMCP uses Server-Sent Events (SSE) as its transport protocol under `streamable-http`. Web browsers, by default, request HTML or general data, whereas the MCP endpoint requires the client request header to specifically accept `text/event-stream`.
+
+**How to solve / test correctly:**
+1. **Use MCP Inspector (Recommended)**:
+   ```bash
+   npx @modelcontextprotocol/inspector python calculator_server.py
+   ```
+2. **Using curl**:
+   If testing with `curl` or any other HTTP client, you must explicitly pass the `Accept: text/event-stream` header:
+   ```bash
+   curl -H "Accept: text/event-stream" http://localhost:8000/mcp
+   ```
+
