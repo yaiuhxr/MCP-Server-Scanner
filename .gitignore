@@ -145,3 +145,9 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Node & Next.js build
+node_modules/
+mcp-discovery-ui/node_modules/
+mcp-discovery-ui/.next/
+mcp-discovery-ui/.env*
